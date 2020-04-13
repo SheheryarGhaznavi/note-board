@@ -74,11 +74,24 @@
                     }
                 },
 
+                getInitialState() {
+                    return {
+                        notes: [
+                            '1st note',
+                            '2nd Note',
+                            '3rd Note',
+                            '4rth Note'
+                        ]
+                    }
+                },
+
                 render() {
                     return (
                         
                         <div className="board">
-                            {this.props.count}
+                            {this.state.notes.map((note,i) => {
+                                return <Note key={i}>{note}</Note>
+                            })}
                         </div>
                     )
                 }
