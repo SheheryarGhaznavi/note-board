@@ -21,10 +21,10 @@
                     alert('Removing..');
                 },
 
-                render(){
+                render() {
                     return (
                         <div className="note">
-                            <p></p>
+                            <p>{this.props.children}</p>
                             <span>
                                 <button onClick={this.edit}>EDIT</button>
                                 <button onClick={this.remove}>X</button>
@@ -34,7 +34,7 @@
                 }
             })
 
-            ReactDOM.render(<Note></Note>,document.getElementById('react-container'))
+            ReactDOM.render(<Note>Hello World</Note>,document.getElementById('react-container'))
         
 
         </script>
