@@ -85,13 +85,15 @@
                     }
                 },
 
+                createNote(value,index) {
+                    return <Note key={index}>{value}</Note>
+                },
+
                 render() {
                     return (
                         
                         <div className="board">
-                            {this.state.notes.map((note,i) => {
-                                return <Note key={i}>{note}</Note>
-                            })}
+                            {this.state.notes.map(this.createNote)}
                         </div>
                     )
                 }
