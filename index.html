@@ -13,15 +13,36 @@
 
             var Note = React.createClass({
 
+                getInitialState() {
+                    return {
+                        editing : false,
+                    }
+                },
+
                 edit() {
-                    alert('Editing..');
+                    this.setState({ editing:true })
+                },
+
+                save() {
+                    this.setState({ editing:false });
                 },
 
                 remove() {
                     alert('Removing..');
                 },
 
-                render() {
+                renderForm() {
+                    return (
+                        <div className="note">
+                            <textarea></textarea>
+                            <span>
+                                <button onClick={this.save}>SAVE</button>
+                            </span>
+                        </div>
+                    )
+                },
+
+                renderDisplay() {
                     return (
                         <div className="note">
                             <p>{this.props.children}</p>
@@ -31,6 +52,10 @@
                             </span>
                         </div>
                     )
+                },
+
+                render() {
+                    return (this.state.editing) ? this.renderForm() : this.renderDisplay() 
                 }
             })
 
