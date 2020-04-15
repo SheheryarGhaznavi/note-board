@@ -81,7 +81,7 @@
                 },
 
                 render() {
-                    return (this.state.editing) ? this.renderForm() : this.renderDisplay() 
+                    return <ReactDraggable>{(this.state.editing) ? this.renderForm() : this.renderDisplay()}</ReactDraggable> 
                 }
             })
 
