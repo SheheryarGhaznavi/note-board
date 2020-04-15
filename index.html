@@ -24,12 +24,12 @@
                 },
 
                 save() {
-                    this.refs.text.value
+                    this.props.onUpdate(this.refs.text.value, this.props.id);
                     this.setState({ editing:false });
                 },
 
                 remove() {
-                    alert('Removing..');
+                    this.props.onRemove(this.props.id);
                 },
 
                 renderForm() {
@@ -77,16 +77,34 @@
                 getInitialState() {
                     return {
                         notes: [
-                            '1st note',
-                            '2nd Note',
-                            '3rd Note',
-                            '4rth Note'
+                            { id: 0 , note : '1st note'},
+                            { id: 1 , note : '2nd note'},
+                            { id: 2 , note : '3rd note'},
+                            { id: 3 , note : '4rth note'}
                         ]
                     }
                 },
 
-                createNote(value,index) {
-                    return <Note key={index}>{value}</Note>
+                update(text, id) {
+                    var notes = this.state.notes.map(
+                        note => ( (note.id !== id) ? note : { ...note , note: text } )
+                    );
+                    this.setState({notes});
+                },
+
+                remove(id) {
+                    var notes = this.state.notes.filter(note => note.id !== id);
+                    this.setState({notes});
+                },
+
+                createNote(value) {
+                    return (<Note 
+                                key={value.id}
+                                id={value.id}
+                                onUpdate={this.update}
+                                onRemove={this.remove} >
+                                {value.note}
+                            </Note>);
                 },
 
                 render() {
@@ -99,7 +117,7 @@
                 }
             })
 
-            ReactDOM.render(<Board count={"10"} />,document.getElementById('react-container'))
+            ReactDOM.render(<Board count={10} />,document.getElementById('react-container'))
         
 
         </script>
