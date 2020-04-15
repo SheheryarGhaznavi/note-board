@@ -26,6 +26,18 @@
                     }
                 },
 
+                componentDidUpdate() {
+                    console.log("update");
+                    if (this.state.editing) {
+                        this.refs.text.focus();
+                        this.refs.text.select();
+                    }
+                },
+
+                shouldComponentUpdate(nextProps, nextState) {
+                    return this.props.children !== nextProps.children || this.state !== nextState;
+                },
+
                 randomBetween(x, y, s) {
                     return (x + Math.ceil(Math.random() *  (y-x))) +s;
                 },
@@ -46,7 +58,7 @@
                 renderForm() {
                     return (
                         <div className="note" style={this.style}>
-                            <textarea ref="text" ></textarea>
+                            <textarea ref="text" defaultValue={this.props.children}></textarea>
                             <span>
                                 <button onClick={this.save}>SAVE</button>
                             </span>
